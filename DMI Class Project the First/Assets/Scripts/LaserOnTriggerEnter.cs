@@ -6,13 +6,19 @@ public class LaserOnTriggerEnter : MonoBehaviour
 {
     public GameObject laserEyeRight;
     public GameObject laserEyeLeft;
+    public AudioSource gorillaSource;
+    public AudioClip[] gorillaClip;
+
+    private void Start()
+    {
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            laserEyeLeft.SetActive(true);
-            laserEyeRight.SetActive(true);
+            gorillaSource.clip = gorillaClip[Random.Range(0, gorillaClip.Length)];
+            gorillaSource.Play();
         }
     }
 
@@ -20,8 +26,6 @@ public class LaserOnTriggerEnter : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            laserEyeLeft.SetActive(false);
-            laserEyeRight.SetActive(false);
         }
     }
 }
