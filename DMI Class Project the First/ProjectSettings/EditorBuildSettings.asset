@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MechCombatKit/Demos/Scenes/MCK_Basics_MechSimple.unity
     guid: 2acd204c3a6c51d47b8bd281398a01bd
+  - enabled: 1
+    path: Assets/Scenes/mainMenu.unity
+    guid: 9a3faa057598e62488a6a81553c9db66
+  - enabled: 1
+    path: Assets/Scenes/gameScene.unity
+    guid: 35718e319fcdc0e4e924d7ca34e43237
   m_configObjects: {}
