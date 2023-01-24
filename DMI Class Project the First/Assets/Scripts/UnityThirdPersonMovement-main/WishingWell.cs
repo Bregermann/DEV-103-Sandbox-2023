@@ -10,10 +10,14 @@ public class WishingWell : MonoBehaviour
     public GameObject coin;
     public GameObject[] rock;
     public GameObject[] balls;
+    public Material[] skyboxen;
+    public float transitionSpeed = 0.001f;
+    public int currentSkyboxIndex = 0;
 
     // Start is called before the first frame update
     private void Start()
     {
+        RenderSettings.skybox = skyboxen[currentSkyboxIndex];
     }
 
     // Update is called once per frame
@@ -37,6 +41,10 @@ public class WishingWell : MonoBehaviour
             if (whichWish == 2)
             {
                 BouncyBalls();
+            }
+            if (whichWish == 3)
+            {
+                SkyBoxChange();
             }
         }
     }
@@ -67,5 +75,19 @@ public class WishingWell : MonoBehaviour
 
     private void SkyBoxChange()
     {
+        currentSkyboxIndex = Random.Range(0, skyboxen.Length);
+        StartCoroutine(TransitionToSkybox(skyboxen[currentSkyboxIndex]));
+    }
+
+    private IEnumerator TransitionToSkybox(Material newSkybox)
+    {
+        float transition = 0.0f;
+        Material previousSkybox = RenderSettings.skybox;
+        while (transition < 1.0f)
+        {
+            transition += Time.deltaTime * transitionSpeed;
+            RenderSettings.skybox.Lerp(previousSkybox, newSkybox, transition);
+            yield return null;
+        }
     }
 }
