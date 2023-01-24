@@ -17,8 +17,12 @@ public class ThirdPersonMovement : MonoBehaviour
     public LayerMask groundMask;
     private bool isGrounded;
     public float jumpHeight = 3f;
-    
-    void Update()
+
+    public GameObject coin;
+    public Collectible c;
+    public Transform coinSpawn;
+
+    private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -44,8 +48,22 @@ public class ThirdPersonMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            ThrowIt();
+        }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void ThrowIt()
+    {
+        if (c.coin >= 1)
+        {
+            Instantiate(coin, coinSpawn.position, coinSpawn.rotation);
+            c.coin--;
+            c.throwText.text = "Coins: " + c.coin;
+        }
     }
 }

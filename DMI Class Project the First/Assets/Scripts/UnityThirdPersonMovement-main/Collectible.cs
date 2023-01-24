@@ -14,6 +14,10 @@ public class Collectible : MonoBehaviour
     public GameObject gotThemAll;
     public float removeGraphicTimer;
 
+    public int coin;
+    public TMP_Text throwText;
+    public AudioClip[] coinClip;
+
     // Start is called before the first frame update
     private void Start()
     {
