@@ -14,6 +14,13 @@ public class WishingWell : MonoBehaviour
     public float transitionSpeed = 0.001f;
     public int currentSkyboxIndex = 0;
 
+    public GameObject ground;
+    public AudioSource wellSource;
+    public AudioClip straightToHellClip;
+    public Material hellSkyBox;
+    public Transform hellFireSpawn;
+    public GameObject hellfire;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -46,6 +53,10 @@ public class WishingWell : MonoBehaviour
             {
                 SkyBoxChange();
             }
+        }
+        if (other.tag == "Rock")
+        {
+            StraightToHellWithYou();
         }
     }
 
@@ -89,5 +100,19 @@ public class WishingWell : MonoBehaviour
             RenderSettings.skybox.Lerp(previousSkybox, newSkybox, transition);
             yield return null;
         }
+    }
+
+    private void StraightToHellWithYou()
+    {
+        //turn off collider for the ground
+        ground.GetComponent<MeshCollider>().enabled = false;
+        //play a demonic sounding voice
+        wellSource.clip = straightToHellClip;
+        wellSource.Play();
+        //turn the sky to red
+        StartCoroutine(TransitionToSkybox(hellSkyBox));
+        //set everything on fire
+        Instantiate(hellfire, hellFireSpawn.position, hellFireSpawn.rotation);
+        //way under the map we have hell
     }
 }
