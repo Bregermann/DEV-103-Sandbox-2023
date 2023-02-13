@@ -8,6 +8,8 @@ TagManager:
   - Coin
   - Rock
   - ClingPoint
+  - CinemachineTarget
+  - RotatingPlatform
   layers:
   - Default
   - TransparentFX
