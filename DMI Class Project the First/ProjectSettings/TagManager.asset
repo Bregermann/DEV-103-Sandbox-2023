@@ -10,6 +10,9 @@ TagManager:
   - ClingPoint
   - CinemachineTarget
   - RotatingPlatform
+  - Street
+  - Grass
+  - MiniMapLayer
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - MiniMapLayer
   - 
   - UIManagedFOV
   - UINoFOV
