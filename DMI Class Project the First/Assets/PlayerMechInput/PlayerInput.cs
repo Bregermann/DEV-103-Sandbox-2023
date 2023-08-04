@@ -5,10 +5,17 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
 
+
 namespace Player{
 
     public class PlayerInput : MonoBehaviour
     {
+        private Rigidbody rb;
+
+        private float movementX;
+        private float movementY;
+        public float speed = 10;
+
 
         public InputAction Movement;
         public InputAction Aiming;
@@ -16,16 +23,27 @@ namespace Player{
 
         public InputActionMap PlayerActions; 
 
-        // Start is called before the first frame update
+        ////////////////////////////////////////////////////////////////
         void Start()
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        void Update()
         {
             
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-            
+        void FixedUpdate() {
+            Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+            rb.AddForce(movement * speed);    
+        }
+        ////////////////////////////////////////////////////////////////
+        private void OnMove(InputValue movementValue) {
+            Vector2 movementVector = movementValue.Get<Vector2>();
+
+            movementX = movementVector.x;
+            movementY = movementVector.y;
         }
     }
 }
